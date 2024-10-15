@@ -28,7 +28,7 @@ sudo apt-get install libboost-lockfree-dev
 ### Clone the Repository
 
 ```bash
-git clone https://github.com/yourusername/Cpp23LockFreeQueue.git
+git clone https://github.com/cschladetsch/Cpp23LockFreeQueue.git
 cd Cpp23LockFreeQueue
 ```
 
