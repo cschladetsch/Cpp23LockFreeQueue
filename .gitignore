@@ -1,0 +1,47 @@
+# Compiled object files
+*.o
+*.ko
+*.obj
+*.elf
+
+# Compiled dynamic libraries
+*.so
+*.dylib
+*.dll
+
+# Compiled static libraries
+*.a
+*.lib
+
+# Executables
+*.exe
+*.out
+*.app
+lock_free_queue_driver
+
+# Build directories
+build/
+bin/
+
+# IDE-specific files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Temporary files
+*.log
+*.tmp
+
+# Core dumps
+core
+
+# Dependency directories
+deps/
+
+# Custom ignore
+# Add any other files or directories you want to ignore
