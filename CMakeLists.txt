@@ -1,11 +1,15 @@
 cmake_minimum_required(VERSION 3.10)
+project(LockFreeQueueTest)
 
-project(LockFreeQueueComparison)
+set(CMAKE_CXX_STANDARD 20)
 
-set(CMAKE_CXX_STANDARD 17)
+# Find the Boost library (no specific components needed)
+find_package(Boost REQUIRED)
 
-find_package(Boost 1.82 REQUIRED COMPONENTS lockfree)
+# Add Boost include directories
+include_directories(${Boost_INCLUDE_DIRS} include)
 
+# Add executables for the tests
 add_executable(run_tests src/run_tests.cpp)
-target_link_libraries(run_tests Boost::lockfree)
+target_link_libraries(run_tests ${Boost_LIBRARIES})
 

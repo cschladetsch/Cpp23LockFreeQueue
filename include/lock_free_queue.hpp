@@ -1,45 +1,41 @@
 #ifndef LOCK_FREE_QUEUE_HPP
 #define LOCK_FREE_QUEUE_HPP
 
-#include <memory>
-#include <atomic>
+#include <queue>
+#include <mutex>
 
-template <typename T>
+template<typename T>
 class LockFreeQueue {
-private:
-    struct Node {
-        T data;
-        std::unique_ptr<Node> next;
-        Node(T value) : data(value), next(nullptr) {}
-    };
-
-    std::unique_ptr<Node> head;
-    Node* tail;
-
 public:
-    LockFreeQueue() : head(nullptr), tail(nullptr) {}
+    using value_type = T;  // Define value_type as T
 
-    void enqueue(T value) {
-        std::unique_ptr<Node> new_node = std::make_unique<Node>(value);
-        Node* new_tail = new_node.get();
+    // Constructor
+    LockFreeQueue() = default;
 
-        if (tail) {
-            tail->next = std::move(new_node);
-        } else {
-            head = std::move(new_node);
-        }
-        tail = new_tail;
-    }
+    // Destructor
+    ~LockFreeQueue() = default;
 
-    bool dequeue(T& result) {
-        if (!head) return false;
-        result = head->data;
-        head = std::move(head->next);
-        if (!head) {
-            tail = nullptr;
-        }
+    // Push item into the queue (matches Boost's push)
+    bool push(const T& item) {
+        std::lock_guard<std::mutex> lock(mutex_);
+        queue_.push(item);
         return true;
     }
+
+    // Pop item from the queue (matches Boost's pop)
+    bool pop(T& result) {
+        std::lock_guard<std::mutex> lock(mutex_);
+        if (queue_.empty()) {
+            return false;
+        }
+        result = queue_.front();
+        queue_.pop();
+        return true;
+    }
+
+private:
+    std::queue<T> queue_;  // Underlying standard queue
+    std::mutex mutex_;      // Mutex for thread-safety
 };
 
 #endif // LOCK_FREE_QUEUE_HPP

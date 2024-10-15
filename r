@@ -1,5 +1,7 @@
 
 #!/bin/bash
+clear
+
 echo "Building the project..."
 cmake -S . -B build
 cmake --build build
