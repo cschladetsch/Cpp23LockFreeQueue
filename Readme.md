@@ -2,6 +2,10 @@
 
 This project provides a comparison between a custom `LockFreeQueue` implementation and Boost's `boost::lockfree::queue`. It runs performance tests to compare the two implementations in a multi-threaded environment.
 
+## Sample
+
+![image](./resources/Image-01.jpg)
+
 ## Table of Contents
 
 1. [Installation](#installation)
