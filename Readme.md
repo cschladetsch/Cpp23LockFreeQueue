@@ -1,43 +1,60 @@
 # Lock-Free Queue Implementation
 
-This project implements a lock-free queue in C++23, demonstrating concurrent programming techniques and the use of atomic operations.
+A high-performance, lock-free queue implementation in C++23 with a multi-threaded producer-consumer test harness. This project demonstrates concurrent programming techniques and the use of atomic operations.
 
-## Files
+## Features
 
-- `lock_free_queue.hpp`: Contains the implementation of the lock-free queue.
-- `main.cpp`: Driver program to test the lock-free queue with multiple producers and consumers.
-- `build.sh`: Bash script to compile the project.
+- Lock-free queue implementation using C++23 features
+- Multi-threaded producer-consumer test harness
+- Colorful console output using the Rang library
+- Easy-to-use build and run scripts
 
 ## Requirements
 
 - C++23 compatible compiler (e.g., GCC 11+ or Clang 13+)
 - POSIX-compliant operating system (Linux, macOS, etc.)
+- curl or wget (for downloading the Rang library)
+
+## Files
+
+- `lock_free_queue.hpp`: Lock-free queue implementation
+- `main.cpp`: Producer-consumer test harness
+- `build.sh`: Compilation script (auto-downloads Rang library if needed)
+- `r`: Build and run script with configurable parameters
 
 ## Building the Project
 
-To build the project, run the following command in the terminal:
+To build the project, run:
 
 ```bash
 ./build.sh
 ```
 
-This will compile the source files and create an executable named `lock_free_queue_driver`.
+This script will automatically download the Rang library if it's not already present in the project directory. The script requires either `curl` or `wget` to be installed for downloading the Rang library.
 
 ## Running the Program
 
-After building, you can run the program with the following command:
+Use the `r` script to build and run the program:
 
 ```bash
-./lock_free_queue_driver <num_producers> <num_consumers> <items_per_producer>
+./r [p] [c] [i]
 ```
 
-For example:
+Where:
+- `p`: number of producers (default: 3)
+- `c`: number of consumers (default: 2)
+- `i`: items per producer (default: 10000)
+
+For verbose output, use the `-v` or `--verbose` flag:
 
 ```bash
-./lock_free_queue_driver 3 2 10000
+./r -v [p] [c] [i]
 ```
 
-This will run the test with 3 producers, 2 consumers, and 10000 items per producer.
+Examples:
+- Run with default settings: `./r`
+- Run with custom settings: `./r 5 4 20000`
+- Run with verbose output: `./r -v 5 4 20000`
 
 ## Implementation Details
 
@@ -54,10 +71,10 @@ The implementation uses a single-linked list with atomic pointers for the head a
 
 This implementation aims to provide high concurrency and low latency for multi-threaded producer-consumer scenarios. However, actual performance may vary depending on the specific use case and system characteristics.
 
-## License
-
-[Specify your license here, e.g., MIT, GPL, etc.]
-
 ## Contributing
 
-[If you want to accept contributions, specify how others can contribute to your project.]
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+## License
+
+MIT.
