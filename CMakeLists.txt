@@ -1,40 +1,53 @@
-cmake_minimum_required(VERSION 3.14)
+# Minimum required version of CMake
+cmake_minimum_required(VERSION 3.10)
 
-project(LockFreeQueue VERSION 1.0)
-
-set(CMAKE_CXX_STANDARD 23)
+# Project name and C++ standard
+project(LockFreeQueueProject VERSION 1.0 LANGUAGES CXX)
+set(CMAKE_CXX_COMPILER "g++")
+set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-include(FetchContent)
+# Enable Thread Sanitizer if required
+option(ENABLE_THREAD_SANITIZER "Enable ThreadSanitizer" OFF)
 
-# Download Rang
-FetchContent_Declare(
-  rang
-  GIT_REPOSITORY https://github.com/agauniyal/rang.git
-  GIT_TAG        master
+# Add include directory
+include_directories(${CMAKE_SOURCE_DIR}/include)
+
+# Define the source files
+set(SOURCES
+    src/lock_free_queue_test.cpp
 )
-FetchContent_MakeAvailable(rang)
 
-# Link Threads library
+# Define the source files for performance comparison
+set(PERFORMANCE_SOURCES
+    src/performance_comparison.cpp
+)
+
+# Add the executable target for testing
+add_executable(lock_free_queue_test ${SOURCES})
+
+# Add the executable target for performance comparison
+add_executable(performance_comparison ${PERFORMANCE_SOURCES})
+
+# Add pthread linking
 find_package(Threads REQUIRED)
+target_link_libraries(lock_free_queue_test PRIVATE Threads::Threads)
+target_link_libraries(performance_comparison PRIVATE Threads::Threads)
 
-option(USE_BOOST "Use Boost libraries" OFF)
-
-if(USE_BOOST)
-    find_package(Boost 1.74 REQUIRED COMPONENTS system thread)
-    add_definitions(-DUSE_BOOST)
+# Enable Thread Sanitizer if the option is turned on
+if(ENABLE_THREAD_SANITIZER)
+    message(STATUS "Enabling ThreadSanitizer")
+    target_compile_options(lock_free_queue_test PRIVATE -fsanitize=thread)
+    target_link_libraries(lock_free_queue_test PRIVATE -fsanitize=thread)
+    target_compile_options(performance_comparison PRIVATE -fsanitize=thread)
+    target_link_libraries(performance_comparison PRIVATE -fsanitize=thread)
 endif()
 
-add_executable(lock_free_queue_driver main.cpp)
-target_link_libraries(lock_free_queue_driver PRIVATE Threads::Threads rang)
+# If you want to add sanitizers globally, uncomment the following lines:
+# set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=thread")
+# set(CMAKE_LINKER_FLAGS "${CMAKE_LINKER_FLAGS} -fsanitize=thread")
 
-add_executable(performance_comparison performance_comparison.cpp)
-target_link_libraries(performance_comparison PRIVATE Threads::Threads rang)
-
-if(USE_BOOST)
-    target_link_libraries(performance_comparison PRIVATE Boost::system Boost::thread)
-endif()
-
-install(TARGETS lock_free_queue_driver performance_comparison
-        RUNTIME DESTINATION bin)
+# Create a test target
+enable_testing()
+add_test(NAME LockFreeQueueTest COMMAND lock_free_queue_test)
 
