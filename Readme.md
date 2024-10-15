@@ -1,2 +1,109 @@
-[?1049h[22;0;0t[>4;2m[?1h=[?2004h[1;61r[?12h[?12l[22;2t[22;1t[27m[23m[29m[m[H[2J[?25l[1;1H[38;5;130m1   [m
-[94m~                                                                                                                               [3;1H~                                                                                                                               [4;1H~                                                                                                                               [5;1H~                                                                                                                               [6;1H~                                                                                                                               [7;1H~                                                                                                                               [8;1H~                                                                                                                               [9;1H~                                                                                                                               [10;1H~                                                                                                                               [11;1H~                                                                                                                               [12;1H~                                                                                                                               [13;1H~                                                                                                                               [14;1H~                                                                                                                               [15;1H~                                                                                                                               [16;1H~                                                                                                                               [17;1H~                                                                                                                               [18;1H~                                                                                                                               [19;1H~                                                                                                                               [20;1H~                                                                                                                               [21;1H~                                                                                                                               [22;1H~                                                                                                                               [23;1H~                                                                                                                               [24;1H~                                                                                                                               [25;1H~                                                                                                                               [26;1H~                                                                                                                               [27;1H~                                                                                                                               [28;1H~                                                                                                                               [29;1H~                                                                                                                               [30;1H~                                                                                                                               [31;1H~                                                                                                                               [32;1H~                                                                                                                               [33;1H~                                                                                                                               [34;1H~                                                                                                                               [35;1H~                                                                                                                               [36;1H~                                                                                                                               [37;1H~                                                                                                                               [38;1H~                                                                                                                               [39;1H~                                                                                                                               [40;1H~                                                                                                                               [41;1H~                                                                                                                               [42;1H~                                                                                                                               [43;1H~                                                                                                                               [44;1H~                                                                                                                               [45;1H~                                                                                                                               [46;1H~                                                                                                                               [47;1H~                                                                                                                               [48;1H~                                                                                                                               [49;1H~                                                                                                                               [50;1H~                                                                                                                               [51;1H~                                                                                                                               [52;1H~                                                                                                                               [53;1H~                                                                                                                               [54;1H~                                                                                                                               [55;1H~                                                                                                                               [56;1H~                                                                                                                               [57;1H~                                                                                                                               [58;1H~                                                                                                                               [59;1H~                                                                                                                               [60;1H~                                                                                                                               [m[61;111H0,0-1[9CAll[25;56HVIM - Vi IMproved[27;57Hversion 8.1.1847[28;53Hby Bram Moolenaar et al.[29;45HModified by team+vim@tracker.debian.org[30;43HVim is open source and freely distributable[32;50HBecome a registered Vim user![33;42Htype  :help register[34m<Enter>[m   for information [35;42Htype  :q[34m<Enter>[m               to exit         [36;42Htype  :help[34m<Enter>[m  or  [34m<F1>[m  for on-line help[37;42Htype  :help version8[34m<Enter>[m   for version info[1;5H[?25h[?25l[61;1HType  :qa  and press <Enter> to exit Vim[61;111H[K[61;111H0,0-1[9CAll[1;5H[?25h[?25l[61;111H[K[61;111H0,0-1[9CAll[1;5H[?25h[?25l[61;111H[K[61;111H0,0-1[9CAll[1;5H[?25h[?25l[61;111H[K[61;111H0,0-1[9CAll[1;5H[?25h[?25l[61;111H[K[61;111H0,0-1[9CAll[1;5H[?25h[?25l[61;111H[K[61;111H0,0-1[9CAll[1;5H[?25h[?25l[61;111H[K[61;111H0,0-1[9CAll[1;5H[?25h[?25l[61;111H[K[61;111H0,0-1[9CAll[1;5H[?25h[?25l[61;111H[K[61;111H0,0-1[9CAll[1;5H[?25h[?25l[61;111H[K[61;111H0,0-1[9CAll[1;5H[?25h[?25l[61;111H[K[61;111H0,0-1[9CAll[1;5H[?25h[?25l[61;111H[K[61;111H0,0-1[9CAll[1;5H[?25h[?25l[61;111H[K[61;111H0,0-1[9CAll[1;5H[?25h[?25l[61;111H[K[61;111H0,0-1[9CAll[1;5H[?25h[?25l[61;111H[K[61;111H0,0-1[9CAll[1;5H[?25h[?25l[61;111H[K[61;111H0,0-1[9CAll[1;5H[?25h[?25l[61;111H[K[61;111H0,0-1[9CAll[1;5H[?25h[?25l[61;111H[K[61;111H0,0-1[9CAll[1;5H[?25h[?25l[61;111H[K[61;111H0,0-1[9CAll[1;5H[?25h[?25l[61;111H[K[61;111H0,0-1[9CAll[1;5H[?25h
+# Lock-Free Queue Comparison Project
+
+This project provides a comparison between a custom `LockFreeQueue` implementation and Boost's `boost::lockfree::queue`. It runs performance tests to compare the two implementations in a multi-threaded environment.
+
+## Table of Contents
+
+1. [Installation](#installation)
+2. [Usage](#usage)
+3. [Running the Tests](#running-the-tests)
+4. [Custom Implementation](#custom-implementation)
+5. [Boost Lock-Free Queue](#boost-lock-free-queue)
+6. [Results](#results)
+7. [License](#license)
+
+## Installation
+
+### Prerequisites
+
+- **C++17 compatible compiler**: GCC or Clang
+- **Boost Lock-Free library**: Ensure you have the necessary headers installed.
+
+You can install the required dependencies by running:
+
+```bash
+sudo apt-get install libboost-lockfree-dev
+```
+
+### Clone the Repository
+
+```bash
+git clone https://github.com/yourusername/Cpp23LockFreeQueue.git
+cd Cpp23LockFreeQueue
+```
+
+## Usage
+
+### Configuration
+
+Make sure the correct compiler is set in the project configuration:
+
+```bash
+export CC=/usr/bin/gcc
+export CXX=/usr/bin/g++
+```
+
+### Building the Project
+
+To build the project, run the `r` script, which automates the build and execution:
+
+```bash
+./r
+```
+
+This will:
+
+- Build the project.
+- Run the performance comparison between the custom `LockFreeQueue` and `boost::lockfree::queue`.
+- Display results for minimum, maximum, mean, and standard deviation of execution times.
+
+## Running the Tests
+
+The project includes a script `./r` that builds the project and runs the performance comparison tests.
+
+You can modify the test parameters inside `src/run_tests.cpp` to adjust the number of iterations, producers, and consumers:
+
+```cpp
+int num_iterations = 1000; // Number of iterations
+int num_producers = 1;     // Number of producer threads
+int num_consumers = 1;     // Number of consumer threads
+```
+
+### Running Performance Comparison
+
+Once built, the `run_tests` executable will perform performance tests on both the custom queue and Boost's queue and provide a summary of the results:
+
+```bash
+Running the performance comparison...
+Custom Queue Results:
+- Mean: ...
+- Min: ...
+- Max: ...
+- Stddev: ...
+
+Boost Queue Results:
+- Mean: ...
+- Min: ...
+- Max: ...
+- Stddev: ...
+```
+
+## Custom Implementation
+
+The custom `LockFreeQueue` is defined in `include/lock_free_queue.hpp`. This implementation provides thread-safe, lock-free enqueue and dequeue operations, with a simple API comparable to Boost's queue.
+
+## Boost Lock-Free Queue
+
+This project uses `boost::lockfree::queue` to compare performance with the custom implementation. Boost's queue is a well-established, production-quality lock-free queue implementation.
+
+## Results
+
+The output of the tests will show the performance differences between the two implementations:
+
+- **Mean Time**: The average time taken for enqueue and dequeue operations over multiple iterations.
+- **Min/Max Time**: The shortest and longest time recorded for operations.
+- **Standard Deviation**: The variability in the operation times.
+
+## License
+
+This project is licensed under the MIT License. See the `LICENSE` file for details.
