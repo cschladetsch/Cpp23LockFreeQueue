@@ -8,26 +8,39 @@ template <typename T>
 class LockFreeQueue {
 private:
     struct Node {
-        std::shared_ptr<T> data;
-        std::atomic<Node*> next;
-
-        Node(T value) : data(std::make_shared<T>(value)), next(nullptr) {}
+        T data;
+        std::unique_ptr<Node> next;
+        Node(T value) : data(value), next(nullptr) {}
     };
 
-    std::atomic<Node*> head;
-    std::atomic<Node*> tail;
+    std::unique_ptr<Node> head;
+    Node* tail;
 
 public:
-    LockFreeQueue();                    // Constructor
-    ~LockFreeQueue();                   // Destructor
+    LockFreeQueue() : head(nullptr), tail(nullptr) {}
 
-    void enqueue(T value);              // Adds value to the queue
-    std::shared_ptr<T> dequeue();       // Removes and returns value from the queue
+    void enqueue(T value) {
+        std::unique_ptr<Node> new_node = std::make_unique<Node>(value);
+        Node* new_tail = new_node.get();
 
-    bool empty() const;                 // Checks if queue is empty
+        if (tail) {
+            tail->next = std::move(new_node);
+        } else {
+            head = std::move(new_node);
+        }
+        tail = new_tail;
+    }
+
+    bool dequeue(T& result) {
+        if (!head) return false;
+        result = head->data;
+        head = std::move(head->next);
+        if (!head) {
+            tail = nullptr;
+        }
+        return true;
+    }
 };
-
-#include "lock_free_queue_impl.hpp" // Include template implementation
 
 #endif // LOCK_FREE_QUEUE_HPP
 

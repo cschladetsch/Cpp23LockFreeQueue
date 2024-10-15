@@ -7,7 +7,7 @@
 
 2. Clone the repository:
    ```
-   git clone https://github.com/yourusername/lock-free-queue.git
+   git clone https://github.com/cschladetsch/lock-free-queue.git
    cd lock-free-queue
    ```
 
