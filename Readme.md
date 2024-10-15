@@ -4,7 +4,7 @@ This project provides a comparison between a custom `LockFreeQueue` implementati
 
 ## Sample
 
-![image](./resources/Image-01.jpeg)
+![image](./resources/Image-0.jpeg)
 
 ## Table of Contents
 
