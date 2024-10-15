@@ -1,13 +1,15 @@
 #!/bin/bash
 
-# Build the project with debug symbols
+# Build the project with debug or release flags
+BUILD_TYPE=${1:-Debug}
+
 mkdir -p build
 cd build
-cmake -DCMAKE_BUILD_TYPE=Debug ..
+cmake -DCMAKE_BUILD_TYPE=${BUILD_TYPE} ..
 cmake --build .
 
-# Run the program with GDB
-#gdb -ex "run" -ex "bt full" -ex "quit" --args ./performance_comparison
+# Optionally run with gdb for debugging
 ./performance_comparison
 
 cd ..
+

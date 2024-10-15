@@ -26,10 +26,8 @@ void producer(int id, int items)
     }
 }
 
-void consumer(int id)
-{
-    while (!done || !queue.empty())
-    {
+void consumer(int id) {
+    while (!done || !queue.empty()) {
         auto value_opt = queue.pop();
         if (value_opt) {
             total_popped.fetch_add(*value_opt, std::memory_order_relaxed);

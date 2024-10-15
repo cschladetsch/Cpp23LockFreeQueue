@@ -58,17 +58,18 @@ public:
             Node* first = head.load(std::memory_order_acquire);
             Node* last = tail.load(std::memory_order_acquire);
             Node* next = first->next.load(std::memory_order_acquire);
+
             if (first == head.load(std::memory_order_acquire)) {
                 if (first == last) {
                     if (next == nullptr) {
+                        // Queue is empty
                         return std::nullopt;
                     }
+                    // Tail is lagging, advance it
                     tail.compare_exchange_weak(last, next, std::memory_order_release);
                 } else {
                     T result = std::move(*next->data);
-                    if (head.compare_exchange_weak(first, next, 
-                                                   std::memory_order_release,
-                                                   std::memory_order_relaxed)) {
+                    if (head.compare_exchange_weak(first, next, std::memory_order_release, std::memory_order_relaxed)) {
                         size.fetch_sub(1, std::memory_order_relaxed);
                         delete first;
                         return result;
